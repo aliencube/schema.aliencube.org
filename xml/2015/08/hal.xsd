@@ -1,0 +1,77 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema attributeFormDefault="unqualified"
+           elementFormDefault="qualified"
+           targetNamespace="http://schema.aliencube.org/xml/2015/08/hal"
+           xmlns="http://schema.aliencube.org/xml/2015/08/hal"
+           xmlns:mstns="http://schema.aliencube.org/xml/2015/08/hal"
+           xmlns:xs="http://www.w3.org/2001/XMLSchema">
+
+    <xs:element name="resource" type="resourceType">
+        <xs:annotation>
+            <xs:documentation>Gets the resource.</xs:documentation>
+        </xs:annotation>
+    </xs:element>
+
+    <xs:complexType name="resourceType">
+        <xs:annotation>
+            <xs:documentation>Defines the root element of the HAL XML document.</xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element name="links" type="linkCollectionType">
+                <xs:annotation>
+                    <xs:documentation>Gets collection of links.</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+
+            <xs:element name="resources" type="resourceCollectionType" minOccurs="0">
+                <xs:annotation>
+                    <xs:documentation>Gets collection of resources.</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+
+            <xs:any processContents="lax" minOccurs="0" maxOccurs="unbounded">
+                <xs:annotation>
+                    <xs:documentation>Gets resource elements.</xs:documentation>
+                </xs:annotation>
+            </xs:any>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="linkCollectionType">
+        <xs:annotation>
+            <xs:documentation>Defines collection of links.</xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element maxOccurs="unbounded" name="link" type="linkeType">
+                <xs:annotation>
+                    <xs:documentation>Gets link.</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="linkeType">
+        <xs:annotation>
+            <xs:documentation>Defines link.</xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element name="rel" type="xs:string" />
+            <xs:element name="href" type="xs:string" />
+            <xs:element minOccurs="0" name="templated" type="xs:boolean" />
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="resourceCollectionType">
+        <xs:annotation>
+            <xs:documentation>Defines collection of resources.</xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element maxOccurs="unbounded" name="resource" type="resourceType">
+                <xs:annotation>
+                    <xs:documentation>Gets the resource.</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+        </xs:sequence>
+    </xs:complexType>
+
+</xs:schema>
